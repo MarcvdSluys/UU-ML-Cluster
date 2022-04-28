@@ -16,7 +16,7 @@ In order to install Conda, you can download the bash script, make it executable,
   chmod u+x install-conda.sh
   ./install-conda.sh
 #+end_src
-Note that this changes your settings in =~/.bashrc=.
+This takes about 5 minutes.  Note that the installer changes your settings in =~/.bashrc=.
 
 * Creating a Conda environment for the machine-learning course
 You will have to use a fresh bash shell to do this (one where ~(base)~ is prefixed to your prompt).  You can

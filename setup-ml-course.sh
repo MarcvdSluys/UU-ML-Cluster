@@ -16,7 +16,7 @@ echo -e "This will take about 15 minutes...\n"
 
 echo -e "\nSetting up Conda from $WORKDIR..."
 mkdir -vp $WORKDIR || err "creating Conda directory"
-cd -v $WORKDIR
+cd $WORKDIR
 
 
 echo -e "\nDownloading configuration..."
