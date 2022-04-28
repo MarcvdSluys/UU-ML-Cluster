@@ -2,7 +2,7 @@
 
 * Introduction
 This directory provides the information needed to setup your Conda environment on the Nikhef cluster and get
-started.  Some introductory notes on the use of bash (command-line shell), emacs (text editing), (Python and)
+started.  Some introductory notes on the use of bash (command-line/shell), emacs (text editing), (Python and)
 git can be found in [[file:GettingStartedWithBashEmacsPythonAndGit.pdf]].
 
 We will use [[https://docs.conda.io/][Conda]],an open-source package- and environment-management system, to setup an environment for our
@@ -24,10 +24,18 @@ either logout and login again, or type
 #+begin_src bash
   bash
 #+end_src
-When using the latter option, you will have to type ~exit~ twice to logout from the cluster.
+(When using the latter option, you will have to type ~exit~ twice to logout from the cluster.)  Check that
+~(base)~ is indeed part of your prompt before you continue.
 
-Then setup a Conda environment for the ML course:
+Then download the configuration file and setup the Conda environment for the ML course:
 #+begin_src bash
-  conda env create -f ml-course.yml  # ~15 min
+  wget https://raw.githubusercontent.com/MarcvdSluys/UU-ML-Cluster/master/ml_course.yml
+  conda env create -f ml_course.yml
 #+end_src
+This can take about 15 minutes.
 
+If all went well, you should see the instructions to activate and deactivate the ~ml_course~ Conda environment:
+#+begin_src bash
+  conda activate ml_course
+  conda deactivate
+#+end_src
