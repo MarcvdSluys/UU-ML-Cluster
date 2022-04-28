@@ -1,0 +1,33 @@
+#+title: Readme ML course - cluster
+
+* Introduction
+This directory provides the information needed to setup your Conda environment on the Nikhef cluster and get
+started.  Some introductory notes on the use of bash (command-line shell), emacs (text editing), (Python and)
+git can be found in [[file:GettingStartedWithBashEmacsPythonAndGit.pdf]].
+
+We will use [[https://docs.conda.io/][Conda]],an open-source package- and environment-management system, to setup an environment for our
+machine-learning course with the required packages.  Follow the steps below to install Conda and setup an
+environment. 
+
+* Installing Conda
+In order to install Conda, you can download the bash script, make it executable, and run it:
+#+begin_src bash
+  wget https://github.com/scaudill/machine-learning-for-physics/raw/main/Cluster/install-conda.sh
+  chmod u+x install-conda.sh
+  ./install-conda.sh
+#+end_src
+Note that this changes your settings in =~/.bashrc=.
+
+* Creating a Conda environment for the machine-learning course
+You will have to use a fresh bash shell to do this (one where ~(base)~ is prefixed to your prompt).  You can
+either logout and login again, or type
+#+begin_src bash
+  bash
+#+end_src
+When using the latter option, you will have to type ~exit~ twice to logout from the cluster.
+
+Then setup a Conda environment for the ML course:
+#+begin_src bash
+  conda env create -f ml-course.yml  # ~15 min
+#+end_src
+
