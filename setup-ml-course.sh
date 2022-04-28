@@ -20,7 +20,7 @@ cd -v $WORKDIR
 
 
 echo -e "\nDownloading configuration..."
-wget https://github.com/scaudill/machine-learning-for-physics/raw/main/Cluster/ml_course.yml  ||  err "downloading configuration file"
+wget https://raw.githubusercontent.com/MarcvdSluys/UU-ML-Cluster/master/ml_course.yml  ||  err "downloading configuration file"
 
 
 echo -e "\nCreating environment..."

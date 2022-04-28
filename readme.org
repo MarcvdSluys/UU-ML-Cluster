@@ -1,4 +1,4 @@
-#+title: Readme ML course - cluster
+#+title: Cluster stuff for UU ML course
 
 * Introduction
 This directory provides the information needed to setup your Conda environment on the Nikhef cluster and get
@@ -12,7 +12,7 @@ environment.
 * Installing Conda
 In order to install Conda, you can download the bash script, make it executable, and run it:
 #+begin_src bash
-  wget https://github.com/scaudill/machine-learning-for-physics/raw/main/Cluster/install-conda.sh
+  wget https://raw.githubusercontent.com/MarcvdSluys/UU-ML-Cluster/master/install-conda.sh
   chmod u+x install-conda.sh
   ./install-conda.sh
 #+end_src
