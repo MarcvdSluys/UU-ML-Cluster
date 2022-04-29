@@ -10,7 +10,8 @@ machine-learning course with the required packages.  Follow the steps below to i
 environment. 
 
 * Installing Conda
-In order to install Conda, you can download the bash script, make it executable, and run it:
+If you haven't installed Conda in your account on this cluster before, you should do it now.  In order to do
+so, you can download the following bash script, make it executable, and run it:
 #+begin_src bash
   wget https://raw.githubusercontent.com/MarcvdSluys/UU-ML-Cluster/master/install-conda.sh
   chmod u+x install-conda.sh
@@ -19,13 +20,11 @@ In order to install Conda, you can download the bash script, make it executable,
 This takes about 5 minutes.  Note that the installer changes your settings in =~/.bashrc=.
 
 * Creating a Conda environment for the machine-learning course
-You will have to use a fresh bash shell to do this (one where ~(base)~ is prefixed to your prompt).  You can
-either logout and login again, or type
+You will have to use a fresh bash shell to do this.  You can either logout and login again, or type
 #+begin_src bash
   bash
 #+end_src
-(When using the latter option, you will have to type ~exit~ twice to logout from the cluster.)  Check that
-~(base)~ is indeed part of your prompt before you continue.
+(When using the latter option, you will have to type ~exit~ twice to logout from the cluster.)
 
 Then download the configuration file and setup the Conda environment for the ML course:
 #+begin_src bash
