@@ -204,4 +204,3 @@ dependencies:
     - werkzeug==2.1.1
     - wrapt==1.12.1
     - zipp==3.8.0
-prefix: /data/gravwav/lopezm/cmb_env/miniforge3/envs/ml_course
