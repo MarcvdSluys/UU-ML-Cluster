@@ -2,26 +2,27 @@
 
 * Introduction
 This directory provides the information needed to run your code in a container on the Nikhef cluster with
-access to the GPSu.  Some introductory notes on the use of bash (command-line/shell), emacs (text editing),
+access to the GPUs.  Some introductory notes on the use of bash (command-line/shell), emacs (text editing),
 (Python and) git can be found in [[file:GettingStartedWithBashEmacsPythonAndGit.pdf]].
 
 The [[http://apptainer.org][Singularity/Apptainer]] (the program has been renamed very recently) container provides an environment with
-all the required libraries and packages for our machine-learning.  While we will develop our code on the
+all the required libraries and packages for our machine learning.  While we will develop our code on the
 cluster outside the container, it will need to run it /inside/ the container in order for it to find all the
 necessary dependencies.  In addition, we need to ~ssh~ into a special node in order to gain access to the GPUs.
 Following the steps below should achieve both goals.
 
 * Setting up your environment
-We're assuming here that you have logged in to one of the interactive nodes of the Nikhef Stoomboot cluster.
+We're assuming here that you have logged in to one of the interactive nodes of the Nikhef Stoomboot cluster
+using ~ssh~.
 
 ** Setting your PATH
-The Singularity/Apptainer executable is installed on the share ~/cvmfs/~ and is probably not in your ~PATH~ (i.e.,
-it won't be found when executing ~singularity~).  To remedy that, execute the following line to add the
-directory to your ~PATH~ environmental variable
+The Singularity/Apptainer executable is installed on the share ("network drive") ~/cvmfs/~ and is probably not
+in your ~PATH~ (i.e., it won't be found when simply executing ~singularity~).  To remedy that, execute the
+following line to add the directory to your ~PATH~ environmental variable
 #+begin_src bash
   export PATH=$PATH:/cvmfs/oasis.opensciencegrid.org/mis/singularity/bin
 #+end_src
-This sets the new value of ~PATH~ as it old value followed by the new directory (separated by a colon).  You
+This sets the new value of ~PATH~ as its old value followed by the new directory (separated by a colon).  You
 will have to do this every time you log in. However, if you add this line to =~/.bashrc= (i.e. the hidden file
 (note the leading dot) ~.bashrc~ in your home directory), it will be executed at every new login.  You can check
 whether this worked with
@@ -32,32 +33,32 @@ whether this worked with
 ** An alias for singularity
 We can now run the ~singularity~ executable.  In order to run the Python script ~script.py~, you have two options.
 
-1) Add the ~#!/usr/bin/env python~ shebang as the first line of you script and make it executable using =chmod
-   u+x script.py=.  You can then run it inside and outside our container using
+1) Add the ~#!/usr/bin/env python~ /shebang/ as the first line of your script and make it executable using =chmod
+   u+x script.py=.  You can then run it inside and outside the container using
    #+begin_src bash
-     ./script.py
-     /cvmfs/oasis.opensciencegrid.org/mis/singularity/bin/singularity run --rocm -B /data,/project,/user --env MPLCONFIGDIR=$HOME/.config/matplotlib /data/datagrid/raaij/tensorflow_rocm/container ./script.py
+     ./script.py  # Outside the container
+     /cvmfs/oasis.opensciencegrid.org/mis/singularity/bin/singularity run --rocm -B /data,/project,/user --env MPLCONFIGDIR=$HOME/.config/matplotlib /data/datagrid/raaij/tensorflow_rocm/container ./script.py  # Inside the container
    #+end_src
    
-2) Do /not/ do the above.  In that case you need to run either of
+2) Do /not/ add the shebang or set the executable bit.  In that case you need to run either of
    #+begin_src bash
-     python script.py
-     /cvmfs/oasis.opensciencegrid.org/mis/singularity/bin/singularity run --rocm -B /data,/project,/user --env MPLCONFIGDIR=$HOME/.config/matplotlib /data/datagrid/raaij/tensorflow_rocm/container python ./script.py
+     python script.py  # Outside the container
+     /cvmfs/oasis.opensciencegrid.org/mis/singularity/bin/singularity run --rocm -B /data,/project,/user --env MPLCONFIGDIR=$HOME/.config/matplotlib /data/datagrid/raaij/tensorflow_rocm/container python ./script.py  # Inside the container
    #+end_src
 
-In both cases, you can leave out ~/cvmfs/oasis.opensciencegrid.org/mis/singularity/bin/~ if you added that
+In both cases above, you can leave out ~/cvmfs/oasis.opensciencegrid.org/mis/singularity/bin/~ if you added that
 directory to your ~PATH~ variable.  Still, the command to run your script in a container is quite long, and it
-is useful to set an /alias/ to deal with this
+is useful to set an /alias/ to deal with this:
 #+begin_src bash
   alias ml_run="/cvmfs/oasis.opensciencegrid.org/mis/singularity/bin/singularity run --rocm -B /data,/project,/user --env MPLCONFIGDIR=$HOME/.config/matplotlib /data/datagrid/raaij/tensorflow_rocm/container"
   alias ml_python="/cvmfs/oasis.opensciencegrid.org/mis/singularity/bin/singularity run --rocm -B /data,/project,/user --env MPLCONFIGDIR=$HOME/.config/matplotlib /data/datagrid/raaij/tensorflow_rocm/container python"
   alias ml_shell="/cvmfs/oasis.opensciencegrid.org/mis/singularity/bin/singularity shell --rocm -B /data,/project,/user --env MPLCONFIGDIR=$HOME/.config/matplotlib /data/datagrid/raaij/tensorflow_rocm/container"
 #+end_src
-where we throw in the third alias for good measure and due to our prescient abilities.  Again, it is useful to
-add these definitions to your =~/.bashrc=.  Unlike in the case of the ~PATH~ variable, you can choose your own
-names here.  Setting an alias basically creates a new command (or macro) which will execute whatever is in the
-definition after the equal sign.  In this case, running your Python script inside the container for the two
-cases above reduces to
+(We threw in the third alias for good measure and due to our prescient abilities.)  Again, it is useful to add
+these definitions to your =~/.bashrc=.  Unlike in the case of the ~PATH~ variable, you can choose your own names
+here.  Setting an alias basically creates a new command (or macro) which will execute whatever is in the
+definition between the quotes after the equal sign.  In this example, running your Python script inside the
+container for the two cases above reduces to
 #+begin_src bash
   ml_run ./script.py      # When executable
   ml_python ./script.py   # When non-executable
@@ -71,7 +72,7 @@ favourite editor on Stoomboot, make it executable if desired, and run it using
   ml_python ./script.py   # When non-executable
 #+end_src
 
-However, from the main Stoomboot nodes (~stbc-i1~ and ~stbc-i2~), you do not have access to the GPUs.  Singularity
+However, from the main Stoomboot nodes (~stbc-i1~ and ~stbc-i2~), you do /not/ have access to the GPUs.  Singularity
 will show a warning and your code will not work.  To get access to the GPUs, you need to use a special node.
 From Stoomboot, do either one of
 #+begin_src bash
