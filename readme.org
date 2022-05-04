@@ -1,9 +1,10 @@
-#+title: Cluster stuff for UU ML course
+#+title: Setting up the cluster environment and using a Singularity container for the UU ML course
 
 * Introduction
 This directory provides the information needed to run your code in a container on the Nikhef cluster with
-access to the GPUs.  Some introductory notes on the use of bash (command-line/shell), emacs (text editing),
-(Python and) git can be found in [[file:GettingStartedWithBashEmacsPythonAndGit.pdf]].
+access to the GPUs.  If you'd rather setup a Conda environment, you can look [[file:Conda.org][here]].  Some introductory notes on
+the use of bash (command-line/shell), emacs (text editing), (Python and) git can be found in
+[[file:GettingStartedWithBashEmacsPythonAndGit.pdf]].
 
 The [[http://apptainer.org][Singularity/Apptainer]] (the program has been renamed very recently) container provides an environment with
 all the required libraries and packages for our machine learning.  While we will develop our code on the
@@ -82,4 +83,26 @@ From Stoomboot, do either one of
 This will provide you with an environment that is very similar to that on ~stbc-iX~, but with access to the
 GPUs.
 
+* Installing additional Python packages
+If you want to install extra software, you can create your own /virtual environment/ (venv). Setting that up
+will require a few extra steps in the singularity shell, for which we need to start the Singularity shell,
+i.e. get a prompt /inside/ the container using the third alias defined above
+#+begin_src bash
+  ml_shell
+#+end_src
+
+This will open the shell with a prompt like ~Singularity>~ or ~Apptainer>~, in which you need to do
+#+begin_src bash
+  deactivate  # May give a command not found error - ignore
+  python -m venv /data/gravwav/$USER/.venvs/<my_venv>
+  source /data/gravwav/$USER/.venvs/<my_venv>/bin/activate  # This should add "(<my_env>) " to your prompt
+  pip install <some_software>
+  python ...
+#+end_src
+
+You can deactivate the virtual environment and/or leave the Singularity shell with
+#+begin_src bash
+  deactivate
+  exit  # Will also deactivate the venv
+#+end_src
 

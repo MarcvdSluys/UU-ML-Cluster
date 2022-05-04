@@ -1,4 +1,4 @@
-#+title: Cluster stuff for UU ML course
+#+title: Setting up a Conda environment for the UU ML course
 
 * Introduction
 This directory provides the information needed to setup your Conda environment on the Nikhef cluster and get
@@ -17,7 +17,8 @@ so, you can download the following bash script, make it executable, and run it:
   chmod u+x install-conda.sh
   ./install-conda.sh
 #+end_src
-This takes about 5 minutes.  Note that the installer changes your settings in =~/.bashrc=.
+This takes about 5 minutes and will install Conda in ~/data/gravwav/$USER/.conda/~.  Note that the installer
+changes your settings in =~/.bashrc=.
 
 * Creating a Conda environment for the machine-learning course
 You will have to use a fresh bash shell to do this.  You can either logout and login again, or type
