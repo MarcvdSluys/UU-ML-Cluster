@@ -14,7 +14,12 @@ Following the steps below should achieve both goals.
 
 * Setting up your environment
 We're assuming here that you have logged in to one of the interactive nodes of the Nikhef Stoomboot cluster
-using ~ssh~.
+using ~ssh~, e.g. using
+#+begin_src bash
+  ssh <username>@stbc-i1.nikhef.nl
+#+end_src
+or similar.  Note that you can set up an [[https://www.nikhef.nl/pdp/computing-course/work/ssh.html][ssh public key]] (with a good passphase and agent) to avoid having to
+type your password too often.
 
 ** Setting your PATH
 The Singularity/Apptainer executable is installed on the share ("network drive") ~/cvmfs/~ and is probably not
